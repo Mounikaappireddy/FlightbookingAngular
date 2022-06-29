@@ -1,0 +1,146 @@
+<div style="height: 100vh;">
+  <mat-toolbar color="primary">
+      <mat-toolbar-row>
+       <span>Flight Booking application</span>
+           <span class="example-fill-remaining-space"></span>
+           <span class="align-center"></span>
+           <span class="example-spacer"></span>
+           <div fxShow="true" fxHide.lt-md="true">
+            <a mat-button [routerLink]="'/manageairline'"> Manage Airlines </a>
+            <a mat-button [routerLink]="'/blocktheairline'"> Block Airlines </a>
+            <a mat-button [routerLink]="'/manageschedule'"> Manage Schedules </a>
+            <a mat-button [routerLink]="'/managediscount'"> Manage Discounts </a>   
+                  <button mat-raised-button (click)="logout()" color="link">Logout</button>
+           </div>
+        </mat-toolbar-row>
+     </mat-toolbar>
+
+<div align="center">
+  <form class="example-form" [formGroup]="myForm" novalidate fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
+  <mat-card class="example-card">
+      <header>
+        <mat-card-title>Flight Schedule</mat-card-title>
+      </header>
+      <mat-card-content>
+         <table class="example-full-width" cellspacing="0">
+          <tr>
+            <td> <label>Flight Number : </label></td>
+            <td>
+              <mat-form-field class="example-full-width">
+               <input matInput type="text" formControlName="flightNo">
+               <mat-error *ngIf="myError('flightNo', 'required')">Flight number is required</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td> <label>Airline Name : </label></td>
+            <td>
+              <mat-form-field class="example-full-width">
+              <input matInput type="text"  formControlName="airlinename">
+              <mat-error *ngIf="myError('airlinename', 'required')">Airline id is required</mat-error>
+            </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td> <label>From location :</label></td>
+            <td>
+              <mat-form-field class="example-full-width">
+               <input matInput type="text" formControlName="fromLocation">
+               <mat-error *ngIf="myError('fromLocation', 'required')">From location is required</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td> <label>To Location :</label></td>
+            <td>
+              <mat-form-field class="example-full-width">
+               <input matInput type="text" formControlName="toLocation">
+               <mat-error *ngIf="myError('toLocation', 'required')">To location is required</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td> <label>Price :</label></td>
+            <td>
+              <mat-form-field class="example-full-width">
+               <input matInput type="text" formControlName="price">
+               <mat-error *ngIf="myError('price', 'required')">Price is required</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td> <label>Start Date :</label></td>
+            <td>
+              <mat-form-field class="example-full-width">
+                  <input matInput type="datetime" [matDatepicker]="picker" formControlName="startDate" placeholder="Choose a start date">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-error *ngIf="myError('startDate', 'required')">Start date is required</mat-error>
+                </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td> <label>End Date :</label></td>
+            <td>
+              <mat-form-field class="example-full-width">
+                  <input matInput type="datetime" [matDatepicker]="picker1" formControlName="endDate" placeholder="Choose a end date">
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                  <mat-error *ngIf="myError('endDate', 'required')">End date is required</mat-error>
+                </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td> <label>Schedule Days :</label></td>
+            <td>
+              <mat-form-field class="example-full-width">
+               <input matInput type="text" formControlName="ScheduleDays">
+               <mat-error *ngIf="myError('ScheduleDays', 'required')">Schedule days is required</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+         
+          </table>
+       </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button  (click)="AddInventory()" [disabled]="!myForm.valid" color="primary">Add Schedule Flight</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+  </div>
+  <div class="row" style="height:400px; overflow-y: scroll;" id ="pdfTable" #pdfTable>
+         
+    <table class="table table-striped">
+      <thead>
+       <tr>
+        <td>FLight Number</td>
+            <td>Airline ID</td>
+            <td>From Location </td>
+            <td>To Location</td>
+            <td>Price</td>
+            <td>Start Date</td>
+            <td>End Date</td>
+           <td>Schedule Day </td>
+        </tr>
+      </thead>
+      <tbody>
+       <tr *ngFor="let d of ReturnData;let i=index;" >
+        <td>{{d.flightId}} </td>
+        <td>{{d.airlinename}} </td>
+        <td>{{d.fromLocation}}</td>
+        <td>{{d.toLocation}} </td>
+        <td>{{d.price}} </td>
+        <td>{{d.startDate}}</td>
+        <td>{{d.returnDate}} </td>
+        <td>{{d.scheduleDays}}</td>
+         <td>
+          <mat-card-actions>
+          <button mat-raised-button (click)="RowSelected(d.id)" color="primary" >Delete</button>
+        </mat-card-actions>
+      </td>
+      </tr>
+      </tbody>
+    </table>
+ </div>
+</div>
+  <router-outlet></router-outlet>

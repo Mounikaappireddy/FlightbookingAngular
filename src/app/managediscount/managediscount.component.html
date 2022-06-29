@@ -1,0 +1,82 @@
+<div style="height: 100vh;">
+    <mat-toolbar color="primary">
+        <mat-toolbar-row>
+         <span>Welcome to Flight Booking System</span>
+             <span class="example-fill-remaining-space"></span>
+             <span class="align-center"></span>
+             <span class="example-spacer"></span>
+             <div fxShow="true" fxHide.lt-md="true">
+                <div fxShow="true" fxHide.lt-md="true">
+                    <a mat-button [routerLink]="'/manageairline'"> Manage Airlines </a>
+                    <a mat-button [routerLink]="'/blocktheairline'"> Block Airlines </a>
+                    <a mat-button [routerLink]="'/manageschedule'"> Manage Schedules </a>
+                    <a mat-button [routerLink]="'/managediscount'"> Manage Discounts </a>   
+                    <button mat-raised-button (click)="logout()" color="link">Logout</button>
+                 </div>
+                
+                          
+                <!-- <a mat-button [routerLink]="'/Reports'"> Reports </a> -->
+              
+             </div>
+          </mat-toolbar-row>
+       </mat-toolbar>
+
+       <div align="center">
+        <form class="example-form" [formGroup]="myForm" novalidate fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
+     <mat-card class="example-card">
+        <header>
+          <mat-card-title>Discount Coupon</mat-card-title>
+        </header>
+        <mat-card-content>
+          <table class="example-full-width" cellspacing="0">
+              <tr>
+                <td> <label>Discount Coupon Number : </label></td>
+                <td>
+                  <mat-form-field class="example-full-width">
+                   <input matInput type="text" formControlName="DiscountCoupon" required>
+                   <mat-error *ngIf="myError('DiscountCoupon', 'required')">Coupon number is required</mat-error>
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td> <label>Price : </label></td>
+                <td>
+                  <mat-form-field class="example-full-width">
+                   <input matInput type="text" formControlName="Price" required>
+                   <mat-error *ngIf="myError('Price', 'required')">Price is required</mat-error>
+                  </mat-form-field>
+                </td>
+              </tr>
+            </table>
+          </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button (click)="AddDiscountCoupon()" [disabled]="!myForm.valid" color="primary">Save Coupon</button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+    </div>
+    <div class="row" style="height:400px; overflow-y: scroll;">
+     <table class="table table-striped">
+        <thead>
+         <tr>
+           <td>Discount ID</td>
+           <td>Discount Number</td>
+           <td>Price </td>
+          </tr>
+        </thead>
+        <tbody>
+         <tr *ngFor="let d of ReturnData;let i=index;" >
+           <td>{{d.discountNo}} </td>
+           <td>{{d.disCoupon}} </td>
+           <td>{{d.price}}</td>
+           <td>
+            <mat-card-actions>
+             <button mat-raised-button (click)="RowSelected(d.discountNo)" color="primary" >Delete</button> 
+          </mat-card-actions>
+        </td>
+        </tr>
+        </tbody>
+      </table>
+   </div>
+    </div>
+    <router-outlet></router-outlet>

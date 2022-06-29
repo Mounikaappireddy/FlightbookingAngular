@@ -1,0 +1,102 @@
+<div style="height: 100vh;">
+    <mat-toolbar color="primary">
+        <mat-toolbar-row>
+         <span>Flight Booking application</span>
+             <span class="example-fill-remaining-space"></span>
+             <span class="align-center"></span>
+             <span class="example-spacer"></span>
+             <div fxShow="true" fxHide.lt-md="true">
+              <a mat-button [routerLink]="'/manageairline'"> Manage Airlines </a>
+              <a mat-button [routerLink]="'/blocktheairline'"> Block Airlines </a>
+              <a mat-button [routerLink]="'/manageschedule'"> Manage Schedules </a>
+              <a mat-button [routerLink]="'/managediscount'"> Manage Discounts </a>   
+                    <button mat-raised-button (click)="logout()" color="link">Logout</button>
+             </div>
+          </mat-toolbar-row>
+       </mat-toolbar>
+ 
+  <div align="center">
+    <form class="example-form" [formGroup]="myForm" novalidate fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <mat-card class="example-card">
+        <header>
+          <mat-card-title>Airlines</mat-card-title>
+        </header>
+        <mat-card-content>
+           <table class="example-full-width" cellspacing="0">
+              <tr>
+                <td> <label>Airline Name : </label></td>
+                <td>
+                  <mat-form-field class="example-full-width">
+                   <input matInput type="text" formControlName="airLineName">
+                   <mat-error *ngIf="myError('airLineName', 'required')">Airline name is required</mat-error>
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td> <label>Upload Logo : </label></td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input matInput type="text" formControlName="logo">
+                        <mat-error *ngIf="myError('logo', 'required')">Logo is required</mat-error>
+                       </mat-form-field>
+                  <!-- <input [(ngModel)]="airLogo" [ngModelOptions]="{standalone: true}" id="airLogo" type="file"> -->
+                </td>
+              </tr>
+              <tr>
+                <td> <label>Contact Number :</label></td>
+                <td>
+                  <mat-form-field class="example-full-width">
+                   <input matInput type="text" formControlName="contactNo">
+                   <mat-error *ngIf="myError('contactNo', 'required')">Contact number is required</mat-error>
+                   <mat-error *ngIf="myError('contactNo', 'maxLength')">Contact number should be 10 digit</mat-error>
+                   <mat-error *ngIf="myError('contactNo', 'pattern')">Contact number only accept number and allows 10 digit number</mat-error>
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td> <label>Contact Address :</label></td>
+                <td>
+                  <mat-form-field class="example-full-width">
+                   <input matInput type="text" formControlName="contactAddress" required>
+                   <mat-error *ngIf="myError('contactAddress', 'required')">Contact address is required</mat-error>
+                  </mat-form-field>
+                </td>
+              </tr>
+            </table>
+         </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button (click)="AddNewAirline(myForm.value)"  color="primary">Add New Airline</button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+    </div>
+    <div class="row" style="height:400px; overflow-y: scroll;" id ="pdfTable" #pdfTable>
+           
+      <table class="table table-striped">
+        <thead>
+         <tr>
+           <td>Airline ID</td>
+           <td>Airline Name</td>
+           <td>Contact Number</td>
+           <td>Contact Address</td>
+           <td>Blocked Status</td>
+          </tr>
+        </thead>
+        <tbody>
+         <tr *ngFor="let d of ReturnData;let i=index;" >
+           <td>{{d.airLineId}} </td>
+           <td>{{d.airlineName}} </td>
+           <td>{{d.contactNo}}</td>
+           <td>{{d.contactAddress}}</td>
+           <td>{{d.isBlocked}}</td>
+           <td>
+            <mat-card-actions>
+            <button mat-raised-button (click)="RowSelected(d.airLineId)" color="primary" >Delete</button>
+          </mat-card-actions>
+        </td>
+        </tr>
+        </tbody>
+      </table>
+   </div>
+  </div>
+    <router-outlet></router-outlet>

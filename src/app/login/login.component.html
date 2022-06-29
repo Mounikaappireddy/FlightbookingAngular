@@ -1,0 +1,45 @@
+<div style="height: 100vh;">
+    <mat-toolbar color="primary">
+       <mat-toolbar-row>
+        <span>Flight Booking Application</span>
+            <span class="example-fill-remaining-space"></span>
+            <span class="align-center"></span>
+            <span class="example-spacer"></span>
+          </mat-toolbar-row>
+      </mat-toolbar>
+     
+      <div align="center">
+         <mat-card class="example-card">
+            <header >
+              <mat-card-title>Login</mat-card-title>
+            </header>
+            <mat-card-content>
+              <form class="example-form" [formGroup]="myForm" novalidate fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
+                <table class="example-full-width" cellspacing="0">
+                  <tr>
+                    <td> <label>User Name: </label></td>
+                    <td>
+                      <mat-form-field class="example-full-width">
+                      <input matInput type="text" placeholder="Username" formControlName="username">
+                       <mat-error *ngIf="myError('username', 'required')">Username is required</mat-error> 
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td> <label>Password: </label></td>
+                  <td>
+                    <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Password" type="password" formControlName="password">
+                     <mat-error *ngIf="myError('password', 'required')">Password is required</mat-error> 
+                  </mat-form-field>
+                </td>
+                </tr></table>
+              </form>
+           </mat-card-content>
+            <mat-card-actions>
+              <button mat-raised-button (click)="login(myForm.value)" color="primary">Login</button>
+              <button mat-raised-button (click)="NewUser()" color="primary">User Register</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>

@@ -1,0 +1,68 @@
+
+<div class="d-flex justify-content-center">
+    
+    <div class="card m-3">
+        <div class="card-body">
+            <form [formGroup]="searchForm">
+                <h4 class="row d-flex justify-content-center" style="margin-top: 20px;"> Search flights</h4> <br>
+                    
+               
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label>Source</label>
+                        <input type="text" formControlName="Source" class="form-control" />                            
+                    </div>
+                    <div class="form-group ">
+                        <label>Destination</label>
+                        <input type="text" formControlName="Destination" class="form-control" />                            
+                    </div>
+                </div>
+                
+                    <div class="col-sm-12" style="text-align: center;margin-top: 10px;"><br>
+                        <button type="button" (click)="search(searchForm.value)" class="btn btn-primary mx-3">Search</button>
+                        <button type="button" (click)="backtouser()" class="btn btn-primary mx-3">Back</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="d-flex justify-content-center">
+    <div class="card m-3">
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                    <th>FlightNumber</th>
+                    <th>Airline Name</th>
+                    <th>From Location</th>
+                    <th>To Location</th> 
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    
+                    <th>Ticket Cost</th>
+                  
+                    <!-- <th>Scheduled Days</th> -->
+                    <!-- <th>Trip Type</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let flight of flightsearch">
+                        <td>{{flight.flightId}} </td>
+                        <td>{{flight.airlinename}}</td>
+                        <td>{{flight.fromLocation}}</td>
+                        <td>{{flight.toLocation}}</td>
+                        <td>{{flight.startDate}}</td>
+                        <td>{{flight.returnDate}}</td>
+                        <td>{{flight.price}}</td>
+                        <td>
+                            <button type="button" (click)="BookFlight(flight)" class="btn btn-primary mx-3">Book Now</button>
+                        </td>
+                        <!-- <td>{{flight.scheduledDays}}</td> -->
+                    </tr> 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

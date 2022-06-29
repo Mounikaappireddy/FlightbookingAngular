@@ -1,0 +1,93 @@
+<div style="height: 100vh;">
+    <mat-toolbar color="primary">
+       <mat-toolbar-row>
+        <span>Flight Booking Application</span>
+            <span class="example-fill-remaining-space"></span>
+            <span class="align-center"></span>
+            <span class="example-spacer"></span>
+          </mat-toolbar-row>
+      </mat-toolbar>
+     
+      <div align="center">
+         <mat-card class="example-card">
+            <header >
+              <mat-card-title>User Register</mat-card-title>
+            </header>
+            <mat-card-content>
+               
+              <form class="example-form" [formGroup]="myForm" novalidate fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
+                <table class="example-full-width" cellspacing="0">
+                  <tr>
+                    <td> <label>User ID : </label></td>
+                    <td>
+                      <mat-form-field class="example-full-width">
+                      <input matInput type="text" placeholder="UserID" formControlName="UserID">
+                      <mat-error *ngIf="myError('UserID', 'required')">User ID is required</mat-error>
+                      </mat-form-field>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td> <label>Password : </label></td>
+                  <td>
+                    <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Password" type="password" formControlName="Password">
+                    <mat-error *ngIf="myError('Password', 'required')">Password is required</mat-error>
+                  </mat-form-field>
+                </td>
+                <tr>
+                    <td> <label>First Name: </label></td>
+                  <td>
+                    <mat-form-field class="example-full-width">
+                    <input matInput placeholder="FirstName" type="type" formControlName="FirstName">
+                    <mat-error *ngIf="myError('FirstName', 'required')">First name is required</mat-error>
+                  </mat-form-field>
+                </td>
+                </tr>
+                <tr>
+                    <td> <label>Last Name: </label></td>
+                  <td>
+                    <mat-form-field class="example-full-width">
+                    <input matInput placeholder="LastName" type="type" formControlName="LastName">
+                    <mat-error *ngIf="myError('LastName', 'required')">Last name is required</mat-error>
+                  </mat-form-field>
+                </td>
+                </tr>
+                
+                <tr>
+                    <td> <label>Email ID : </label></td>
+                  <td>
+                    <mat-form-field class="example-full-width">
+                    <input matInput placeholder="EmailID" type="type" formControlName="EmailID">
+                    <mat-error *ngIf="myError('EmailID', 'required')">EmailID is required</mat-error>
+                    <mat-error *ngIf="myError('EmailID', 'pattern')">Email ID is not valid</mat-error>
+                </mat-form-field>
+                </td>
+                </tr>
+                <tr>
+                    <td> <label>Phone Number : </label></td>
+                  <td>
+                    <mat-form-field class="example-full-width">
+                    <input matInput placeholder="PhoneNumber" type="type" formControlName="PhoneNumber">
+                    <mat-error *ngIf="myError('PhoneNumber', 'required')">Phone Number is required</mat-error>
+                    <mat-error *ngIf="myError('PhoneNumber', 'pattern')">Contact number only accept number and allows 10 digit number</mat-error>
+                </mat-form-field>
+                </td>
+                </tr>
+                <tr>
+                    <td> <label>Gender: </label></td>
+                  <td>
+                    <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Gender" type="type" formControlName="Gender">
+                  </mat-form-field>
+                </td>
+                </tr>
+            </table>
+              </form>
+           </mat-card-content>
+            <mat-card-actions>
+              <button mat-raised-button (click)="AddNewUser(myForm.value)"   color="primary">Register</button>
+              <button mat-raised-button (click)="login()" color="primary">Login</button> 
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
